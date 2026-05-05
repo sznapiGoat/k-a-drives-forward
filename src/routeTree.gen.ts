@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SluzbyRouteImport } from './routes/sluzby'
+import { Route as RecenzeRouteImport } from './routes/recenze'
+import { Route as ONasRouteImport } from './routes/o-nas'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as CenikRouteImport } from './routes/cenik'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SluzbyRoute = SluzbyRouteImport.update({
+  id: '/sluzby',
+  path: '/sluzby',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecenzeRoute = RecenzeRouteImport.update({
+  id: '/recenze',
+  path: '/recenze',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ONasRoute = ONasRouteImport.update({
+  id: '/o-nas',
+  path: '/o-nas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CenikRoute = CenikRouteImport.update({
+  id: '/cenik',
+  path: '/cenik',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,90 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cenik': typeof CenikRoute
+  '/kontakt': typeof KontaktRoute
+  '/o-nas': typeof ONasRoute
+  '/recenze': typeof RecenzeRoute
+  '/sluzby': typeof SluzbyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cenik': typeof CenikRoute
+  '/kontakt': typeof KontaktRoute
+  '/o-nas': typeof ONasRoute
+  '/recenze': typeof RecenzeRoute
+  '/sluzby': typeof SluzbyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cenik': typeof CenikRoute
+  '/kontakt': typeof KontaktRoute
+  '/o-nas': typeof ONasRoute
+  '/recenze': typeof RecenzeRoute
+  '/sluzby': typeof SluzbyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/cenik' | '/kontakt' | '/o-nas' | '/recenze' | '/sluzby'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cenik' | '/kontakt' | '/o-nas' | '/recenze' | '/sluzby'
+  id:
+    | '__root__'
+    | '/'
+    | '/cenik'
+    | '/kontakt'
+    | '/o-nas'
+    | '/recenze'
+    | '/sluzby'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CenikRoute: typeof CenikRoute
+  KontaktRoute: typeof KontaktRoute
+  ONasRoute: typeof ONasRoute
+  RecenzeRoute: typeof RecenzeRoute
+  SluzbyRoute: typeof SluzbyRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sluzby': {
+      id: '/sluzby'
+      path: '/sluzby'
+      fullPath: '/sluzby'
+      preLoaderRoute: typeof SluzbyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recenze': {
+      id: '/recenze'
+      path: '/recenze'
+      fullPath: '/recenze'
+      preLoaderRoute: typeof RecenzeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/o-nas': {
+      id: '/o-nas'
+      path: '/o-nas'
+      fullPath: '/o-nas'
+      preLoaderRoute: typeof ONasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cenik': {
+      id: '/cenik'
+      path: '/cenik'
+      fullPath: '/cenik'
+      preLoaderRoute: typeof CenikRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +145,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CenikRoute: CenikRoute,
+  KontaktRoute: KontaktRoute,
+  ONasRoute: ONasRoute,
+  RecenzeRoute: RecenzeRoute,
+  SluzbyRoute: SluzbyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
