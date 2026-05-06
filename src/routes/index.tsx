@@ -72,7 +72,7 @@ function Index() {
                     transition={{ type: "spring", stiffness: 380, damping: 14 }}
                   >
                     <Button asChild size="lg" className="h-auto py-3.5 px-7 font-bold text-base">
-                      <Link to="/kontakt">Přihlásit se na kurz</Link>
+                      <Link to="/kontakt">Zajistit si místo →</Link>
                     </Button>
                   </motion.div>
                 </motion.div>
@@ -89,6 +89,13 @@ function Index() {
                 <Check className="w-4 h-4 text-green-500 shrink-0" />
                 <span>Žádný stres, jen klidný přístup</span>
               </div>
+
+              <div className="flex items-start gap-3 border-l-2 border-primary/25 pl-3 pt-1">
+                <p className="text-sm text-muted-foreground italic leading-snug">
+                  "Zkoušky jsem zvládla napoprvé. Pan Borský má nekonečnou trpělivost!"
+                </p>
+                <span className="text-xs text-muted-foreground shrink-0 pt-0.5 font-medium">— Tereza K.</span>
+              </div>
             </div>
 
             <div className="flex gap-8 pt-4 text-sm">
@@ -102,7 +109,17 @@ function Index() {
             <div aria-hidden className="absolute -top-8 -left-6 w-48 h-48 bg-primary/10 rounded-full -z-10" />
             <div aria-hidden className="absolute -bottom-10 -right-4 w-32 h-32 bg-accent/30 -z-10" style={{ borderRadius: "60% 40% 50% 50%" }} />
             <div className="relative w-full aspect-[5/4] overflow-hidden frame-irregular">
-              <img src={heroImg} alt="Instruktor s žákem v autě" width={1280} height={896} className="w-full h-full object-cover" />
+              <img
+                src={heroImg}
+                alt="Instruktor s žákem v autě"
+                width={1280}
+                height={896}
+                fetchPriority="high"
+                loading="eager"
+                decoding="sync"
+                className="w-full h-full object-cover"
+              />
+              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
             </div>
             <div className="absolute -bottom-6 left-6 md:left-10 bg-background border-2 border-foreground px-5 py-3 max-w-[260px]" style={{ borderRadius: "20px 4px 20px 4px" }}>
               <div className="text-xs uppercase tracking-display text-muted-foreground">Pan Borský</div>
@@ -161,7 +178,7 @@ function Index() {
           </h2>
           <div className="md:text-right">
             <Link to="/kontakt" className="inline-block px-8 py-4 bg-background text-foreground font-bold rounded-md hover:bg-background/90">
-              Přihlásit se ke kurzu
+              Zajistit si místo →
             </Link>
             <p className="mt-3 text-sm opacity-80">nebo zavolejte: <a href="tel:+420739238725" className="font-semibold underline">739 238 725</a></p>
           </div>
