@@ -5,19 +5,19 @@ export const Route = createFileRoute("/sluzby")({
   head: () => ({
     meta: [
       { title: "Služby — Skupiny AM, A1, A2, A, B | Autoškola Káča" },
-      { name: "description", content: "Výcvik skupin AM, A1, A2, A, B a kondiční jízdy. Autoškola Káča Česká Třebová." },
+      { name: "description", content: "Výcvik skupin AM, A, B, C a E. Motocykly, osobní i nákladní automobily, soupravy. Autoškola Káča Česká Třebová." },
       { property: "og:title", content: "Služby — Autoškola Káča" },
-      { property: "og:description", content: "Skupiny AM, A1, A2, A, B a kondiční jízdy v České Třebové." },
+      { property: "og:description", content: "Skupiny AM, A, B, C, E a kondiční jízdy. Česká Třebová, Lanškroun, Sázava." },
     ],
   }),
   component: ServicesPage,
 });
 
 const motos = [
-  { code: "AM", title: "Moped", desc: "Dvoukolová a tříkolová vozidla do 45 km/h.", age: "od 15 let", price: "6 500 Kč", includes: "Teorie + 7 jízd" },
-  { code: "A1", title: "Lehký motocykl", desc: "Motocykly do 125 ccm a 11 kW.", age: "od 16 let", price: "11 900 Kč", includes: "Teorie + 13 jízd" },
-  { code: "A2", title: "Středně silný motocykl", desc: "Motocykly do 35 kW.", age: "od 18 let", price: "13 500 Kč", includes: "Teorie + 13 jízd" },
-  { code: "A", title: "Motocykl bez omezení", desc: "Plné oprávnění — bez výkonového stropu.", age: "od 24 let", price: "14 900 Kč", includes: "Teorie + 13 jízd" },
+  { code: "AM", title: "Moped", desc: "Dvoukolová a tříkolová vozidla do 45 km/h.", age: "od 15 let", price: "Cena na dotaz", includes: "Teorie + jízdy" },
+  { code: "A", title: "Motocykl", desc: "Plné oprávnění pro všechny motocykly bez omezení výkonu.", age: "od 24 let", price: "Cena na dotaz", includes: "Teorie + jízdy" },
+  { code: "C", title: "Nákladní automobil", desc: "Výcvik pro řízení nákladních vozidel nad 3,5 t.", age: "od 18 let", price: "Cena na dotaz", includes: "Teorie + jízdy" },
+  { code: "E", title: "Přípojné vozidlo", desc: "Výcvik pro jízdu se soupravami a přívěsy.", age: "od 18 let", price: "Cena na dotaz", includes: "Teorie + jízdy" },
 ];
 
 function ServicesPage() {

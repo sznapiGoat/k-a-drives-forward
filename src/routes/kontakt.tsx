@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Clock, Phone, Mail, MapPin } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import officeImg from "@/assets/office.jpg";
 
@@ -6,9 +7,9 @@ export const Route = createFileRoute("/kontakt")({
   head: () => ({
     meta: [
       { title: "Kontakt — Autoškola Káča | Staré náměstí 21, Česká Třebová" },
-      { name: "description", content: "Kontakt na autoškolu Káča: Staré náměstí 21, Česká Třebová. Tel: 739 238 725. Úřední hodiny: čtvrtek 16–17h." },
+      { name: "description", content: "Kontakt na autoškolu Káča: Staré náměstí 21, Česká Třebová. Tel: 739 238 725. E-mail: autoskolakaca@seznam.cz. Úřední hodiny: čtvrtek 16–17h." },
       { property: "og:title", content: "Kontakt — Autoškola Káča" },
-      { property: "og:description", content: "Staré náměstí 21, Česká Třebová · 739 238 725" },
+      { property: "og:description", content: "Staré náměstí 21, Česká Třebová · 739 238 725 · autoskolakaca@seznam.cz" },
     ],
   }),
   component: ContactPage,
@@ -22,28 +23,71 @@ function ContactPage() {
         <h1 className="mt-3 text-5xl md:text-6xl font-extrabold leading-tight">
           Najdete nás na Starém&nbsp;náměstí.
         </h1>
+        <p className="mt-4 text-lg text-muted-foreground">
+          Provozovatelka:{" "}
+          <span className="font-semibold text-foreground">Ing. Kateřina Elblová</span>
+        </p>
       </div>
 
       <div className="grid md:grid-cols-12 gap-10">
-        <aside className="md:col-span-5 space-y-8">
-          <div>
-            <div className="text-xs font-bold uppercase tracking-display text-muted-foreground mb-2">Adresa</div>
-            <div className="text-xl font-semibold">Staré náměstí 21<br />560 02 Česká Třebová</div>
-          </div>
-          <div>
-            <div className="text-xs font-bold uppercase tracking-display text-muted-foreground mb-2">Telefon</div>
-            <a href="tel:+420739238725" className="text-2xl font-extrabold text-primary">739 238 725</a>
-          </div>
-          <div>
-            <div className="text-xs font-bold uppercase tracking-display text-muted-foreground mb-2">Úřední hodiny</div>
-            <div className="text-lg">Čtvrtek <strong>16:00 – 17:00</strong></div>
-            <p className="text-sm text-muted-foreground mt-1">Mimo úřední hodiny po telefonické domluvě.</p>
+        <aside className="md:col-span-5 space-y-5">
+
+          {/* Address */}
+          <div className="flex gap-4 p-4 border border-border rounded-lg">
+            <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div>
+              <div className="text-xs font-bold uppercase tracking-display text-muted-foreground mb-1">Adresa</div>
+              <div className="font-semibold leading-snug">Staré náměstí 21<br />560 02 Česká Třebová</div>
+            </div>
           </div>
 
+          {/* Phone */}
+          <div className="flex gap-4 p-4 border border-border rounded-lg">
+            <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div>
+              <div className="text-xs font-bold uppercase tracking-display text-muted-foreground mb-1">Telefon</div>
+              <a href="tel:+420739238725" className="text-xl font-extrabold text-primary hover:opacity-80 transition-opacity">
+                739 238 725
+              </a>
+            </div>
+          </div>
+
+          {/* Email */}
+          <div className="flex gap-4 p-4 border border-border rounded-lg">
+            <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div>
+              <div className="text-xs font-bold uppercase tracking-display text-muted-foreground mb-1">E-mail</div>
+              <a href="mailto:autoskolakaca@seznam.cz" className="font-semibold text-primary hover:underline break-all">
+                autoskolakaca@seznam.cz
+              </a>
+            </div>
+          </div>
+
+          {/* Office hours — featured card */}
+          <div className="flex gap-4 p-5 border-2 border-primary/40 bg-primary/5 rounded-lg">
+            <Clock className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div>
+              <div className="text-xs font-bold uppercase tracking-display text-primary mb-2">Úřední hodiny</div>
+              <div className="font-bold text-lg">Čtvrtek 16:00 – 17:00</div>
+              <p className="text-sm text-muted-foreground mt-1">
+                Mimo úřední hodiny po telefonické domluvě.
+              </p>
+            </div>
+          </div>
+
+          {/* Photo */}
           <div className="frame-irregular overflow-hidden aspect-[4/3]">
-            <img src={officeImg} alt="Sídlo autoškoly Káča na Starém náměstí v České Třebové" width={1024} height={768} loading="lazy" className="w-full h-full object-cover" />
+            <img
+              src={officeImg}
+              alt="Sídlo autoškoly Káča na Starém náměstí v České Třebové"
+              width={1024}
+              height={768}
+              loading="lazy"
+              className="w-full h-full object-cover"
+            />
           </div>
 
+          {/* Map */}
           <div className="border-2 border-foreground overflow-hidden aspect-video" style={{ borderRadius: "20px 4px 20px 4px" }}>
             <iframe
               title="Mapa — Staré náměstí 21, Česká Třebová"

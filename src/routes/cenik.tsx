@@ -4,7 +4,7 @@ export const Route = createFileRoute("/cenik")({
   head: () => ({
     meta: [
       { title: "Ceník — Autoškola Káča Česká Třebová" },
-      { name: "description", content: "Ceník výcviku skupin AM, A1, A2, A, B a kondičních jízd. Bez skrytých poplatků." },
+      { name: "description", content: "Ceník výcviku skupin AM, A, B, C, E a kondičních jízd. Bez skrytých poplatků." },
       { property: "og:title", content: "Ceník — Autoškola Káča" },
       { property: "og:description", content: "Transparentní ceny výcviku v České Třebové." },
     ],
@@ -13,11 +13,11 @@ export const Route = createFileRoute("/cenik")({
 });
 
 const rows = [
-  { cat: "AM — Moped", price: "6 500 Kč", note: "Teorie + 7 jízd" },
-  { cat: "A1 — do 125 ccm", price: "11 900 Kč", note: "Teorie + 13 jízd" },
-  { cat: "A2 — do 35 kW", price: "13 500 Kč", note: "Teorie + 13 jízd" },
-  { cat: "A — bez omezení", price: "14 900 Kč", note: "Teorie + 13 jízd" },
+  { cat: "AM — Moped", price: "Cena na dotaz", note: "Teorie + jízdy" },
+  { cat: "A — Motocykl", price: "Cena na dotaz", note: "Teorie + jízdy" },
   { cat: "B — Osobní automobil", price: "16 900 Kč", note: "Teorie + 28 jízd" },
+  { cat: "C — Nákladní automobil", price: "Cena na dotaz", note: "Teorie + jízdy" },
+  { cat: "E — Přípojné vozidlo", price: "Cena na dotaz", note: "Teorie + jízdy" },
   { cat: "Kondiční jízda (1 h)", price: "850 Kč", note: "Bez výuky teorie" },
   { cat: "Doplňková jízda B (1 h)", price: "750 Kč", note: "Pro stávající žáky" },
 ];

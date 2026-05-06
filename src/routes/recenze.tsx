@@ -7,12 +7,12 @@ export const Route = createFileRoute("/recenze")({
 type Review = { name: string; stars: number; text: string; date: string };
 
 const reviews: Review[] = [
-  { name: "Kristýna Haňáková", stars: 5, date: "Listopad 2025", text: "Pan Borský byl neuvěřitelně trpělivý. Při couvání jsem zpočátku vyloženě panikařila a on klidně dvacetkrát řekl: „Ještě jednou, není kam spěchat.“ Bez nervů mi dal řidičák napoprvé. Doporučuji všema deseti." },
-  { name: "Martin Dvořák", stars: 4, date: "Září 2025", text: "Příjemný rodinný přístup, dobře se domlouvalo na termínech. Občas trochu zmatek v rozvrhu teorie, ale jízdy byly výborné." },
-  { name: "Tereza N.", stars: 5, date: "Srpen 2025", text: "Vrátila jsem se po deseti letech bez auta na kondiční jízdy. Žádné poznámky, žádné posměšky, jen konkrétní rady. Konečně se cítím jistě." },
-  { name: "Pavel Hruška", stars: 3, date: "Červen 2025", text: "Solidní autoškola, cena ok. Zkoušku jsem dělal dvakrát, ale to byla spíš moje chyba než instruktora." },
-  { name: "Adéla K.", stars: 4, date: "Květen 2025", text: "Lidský přístup, žádný velký podnik, kde jste jen číslo. Pan Borský má nervy z titanu." },
-  { name: "Jakub L.", stars: 3, date: "Únor 2025", text: "Cena trochu vyšší než jinde, ale kvalita výuky tomu odpovídá. Skupinu A jsem zvládl bez problémů." },
+  { name: 'Kristýna Haňáková', stars: 5, date: 'Listopad 2025', text: 'Autoškola Káča je neuvěřitelně trpělivá. Při couvání jsem zpočátku vyloženě panikařila, ale klidně mi řekli: Ještě jednou, není kam spěchat. Bez nervů jsem dostala řidičák napoprvé. Doporučuji všema deseti.' },
+  { name: 'Martin Dvořák', stars: 4, date: 'Září 2025', text: 'Příjemný rodinný přístup, dobře se domlouvalo na termínech. Občas trochu zmatek v rozvrhu teorie, ale jízdy byly výborné.' },
+  { name: 'Tereza N.', stars: 5, date: 'Srpen 2025', text: 'Vrátila jsem se po deseti letech bez auta na kondiční jízdy. Žádné poznámky, žádné posměšky, jen konkrétní rady. Konečně se cítím jistě.' },
+  { name: 'Pavel Hruška', stars: 3, date: 'Červen 2025', text: 'Solidní autoškola, cena ok. Zkoušku jsem dělal dvakrát, ale to byla spíš moje chyba než instruktora.' },
+  { name: 'Adéla K.', stars: 4, date: 'Květen 2025', text: 'Lidský přístup, žádný velký podnik, kde jste jen číslo. Paní Elblová má nervy z titanu.' },
+  { name: 'Jakub L.', stars: 3, date: 'Únor 2025', text: 'Cena trochu vyšší než jinde, ale kvalita výuky tomu odpovídá. Skupinu A jsem zvládl bez problémů.' },
 ];
 
 const avg = reviews.reduce((s, r) => s + r.stars, 0) / reviews.length;

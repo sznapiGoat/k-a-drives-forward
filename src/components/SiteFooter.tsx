@@ -14,6 +14,7 @@ export function SiteFooter() {
           <div className="font-semibold mb-2">Kontakt</div>
           <p className="text-muted-foreground">Staré náměstí 21, Česká Třebová</p>
           <p className="text-muted-foreground">Tel: <a href="tel:+420739238725" className="text-primary">739 238 725</a></p>
+          <p className="text-muted-foreground">E-mail: <a href="mailto:autoskolakaca@seznam.cz" className="text-primary">autoskolakaca@seznam.cz</a></p>
           <p className="text-muted-foreground">Úřední hodiny: Čtvrtek 16–17h</p>
         </div>
         <div className="text-sm">

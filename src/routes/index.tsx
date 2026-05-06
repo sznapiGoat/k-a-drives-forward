@@ -87,9 +87,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Autoškola Káča — Řidičák s rodinným přístupem | Česká Třebová" },
-      { name: "description", content: "Získejte řidičský průkaz v rodinné autoškole Káča v České Třebové. Trpělivý instruktor pan Borský, flexibilní jízdy, skupiny AM, A1, A2, A i B." },
+      { name: "description", content: "Získejte řidičský průkaz v rodinné autoškole Káča v České Třebové. Provozovatelka Ing. Kateřina Elblová. Skupiny AM, A, B, C, E. Oblast Česká Třebová, Sázava, Lanškroun." },
       { property: "og:title", content: "Autoškola Káča — Řidičák s rodinným přístupem" },
-      { property: "og:description", content: "Rodinná autoškola v České Třebové. Trpělivý přístup, flexibilní jízdy, skupiny AM–B." },
+      { property: "og:description", content: "Rodinná autoškola v České Třebové. Flexibilní jízdy, skupiny AM, A, B, C, E." },
       { property: "og:type", content: "website" },
     ],
     scripts: [
@@ -100,6 +100,7 @@ export const Route = createFileRoute("/")({
           "@type": "LocalBusiness",
           "name": "Autoškola Káča",
           "telephone": "+420739238725",
+          "email": "autoskolakaca@seznam.cz",
           "url": "https://autoskolakaca.cz",
           "address": {
             "@type": "PostalAddress",
@@ -130,9 +131,14 @@ function Index() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
           <div className="md:col-span-6 space-y-8">
             <AnimatedLogo size="md" />
-            <span className="inline-block text-xs font-bold uppercase tracking-display text-primary border-l-4 border-primary pl-3">
-              Česká Třebová · od roku 1998
-            </span>
+            <div className="flex flex-col gap-1.5">
+              <span className="inline-block text-xs font-bold uppercase tracking-display text-primary border-l-4 border-primary pl-3">
+                Česká Třebová · od roku 1998
+              </span>
+              <span className="inline-block text-xs text-muted-foreground border-l-4 border-primary/30 pl-3">
+                Provozovatelka: Ing. Kateřina Elblová
+              </span>
+            </div>
 
             <motion.h1
               className="text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.05] tracking-tight"
@@ -198,7 +204,7 @@ function Index() {
 
               <div className="flex items-start gap-3 border-l-2 border-primary/25 pl-3 pt-1">
                 <p className="text-sm text-muted-foreground italic leading-snug">
-                  "Zkoušky jsem zvládla napoprvé. Pan Borský má nekonečnou trpělivost!"
+                  "Zkoušky jsem zvládla napoprvé. V autoškole Káča cítíte, že vám na úspěchu záleží."
                 </p>
                 <span className="text-xs text-muted-foreground shrink-0 pt-0.5 font-medium">— Tereza K.</span>
               </div>
@@ -217,7 +223,7 @@ function Index() {
             <div className="relative w-full aspect-[5/4] overflow-hidden frame-irregular">
               <img
                 src={heroImg}
-                alt="Instruktor pan Borský sedí vedle žáka v autě během jízdní lekce autoškoly Káča"
+                alt="Výuka řízení v autoškole Káča — žák s instruktorkou při jízdní lekci v České Třebové"
                 width={1280}
                 height={896}
                 fetchPriority="high"
@@ -227,9 +233,9 @@ function Index() {
               />
               <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
             </div>
-            <div className="absolute -bottom-6 left-6 md:left-10 bg-background border-2 border-foreground px-5 py-3 max-w-[260px]" style={{ borderRadius: "20px 4px 20px 4px" }}>
-              <div className="text-xs uppercase tracking-display text-muted-foreground">Pan Borský</div>
-              <div className="text-sm font-semibold">„Tempo si u nás určuje žák, ne my.“</div>
+            <div className=”absolute -bottom-6 left-6 md:left-10 bg-background border-2 border-foreground px-5 py-3 max-w-[260px]” style={{ borderRadius: “20px 4px 20px 4px” }}>
+              <div className=”text-xs uppercase tracking-display text-muted-foreground”>Ing. Kateřina Elblová</div>
+              <div className=”text-sm font-semibold”>Provozovatelka autoškoly Káča</div>
             </div>
           </div>
         </div>
@@ -240,7 +246,7 @@ function Index() {
         <div className="container mx-auto px-6 py-16 grid md:grid-cols-3 gap-10">
           {[
             { n: "01", t: "Rodinná atmosféra", d: "Žádný call-centrum přístup. U telefonu i za volantem vždy někdo, koho znáte." },
-            { n: "02", t: "Trpělivost na prvním místě", d: "Pan Borský proslul tím, že se s žákem nikdy nehádá. Vše vysvětlí znovu." },
+            { n: "02", t: "Trpělivost na prvním místě", d: "Trpělivost je základ naší výuky. Každé cvičení vysvětlíme tolikrát, kolikrát je třeba." },
             { n: "03", t: "Flexibilní jízdy", d: "Domluvíme se po práci, o víkendu i ráno před školou. Život se nezastaví." },
           ].map((b) => (
             <div key={b.n} className="border-l-2 border-primary pl-5">
@@ -257,7 +263,7 @@ function Index() {
         <div className="grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-5 md:col-start-1 relative">
             <div className="relative w-full aspect-square max-w-md frame-irregular-alt overflow-hidden">
-              <img src={instructorImg} alt="Pan Borský – instruktor autoškoly" width={800} height={800} loading="lazy" className="w-full h-full object-cover" />
+              <img src={instructorImg} alt="Ing. Kateřina Elblová — provozovatelka autoškoly Káča v České Třebové" width={800} height={800} loading="lazy" className="w-full h-full object-cover" />
             </div>
           </div>
           <div className="md:col-span-6 md:col-start-7">
@@ -266,8 +272,8 @@ function Index() {
             </h2>
             <p className="text-lg text-muted-foreground mb-4">
               Káča je rodinná autoškola, která už čtvrt století provází řidiče
-              ze Třebové i okolí. Náš instruktor pan Borský je známý svou
-              klidnou hlavou — i když podruhé spletete plyn s brzdou.
+              ze Třebové, Sázavy i Lanškrouna. Provozovatelka Ing. Kateřina Elblová
+              vede školu s klidnou hlavou — i když podruhé spletete plyn s brzdou.
             </p>
             <Link to="/o-nas" className="inline-flex items-center gap-2 font-bold text-primary hover:gap-3 transition-all">
               Více o nás <span aria-hidden>→</span>
