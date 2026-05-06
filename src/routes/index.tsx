@@ -1,22 +1,128 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Check } from "lucide-react";
+import { z } from "zod";
 import heroImg from "@/assets/hero-driving.jpg";
 import instructorImg from "@/assets/instructor.jpg";
 import { AnimatedLogo } from "@/components/AnimatedLogo";
 import { Button } from "@/components/ui/button";
+
+const ctaSchema = z.object({
+  name: z.string().trim().min(2, "Zadejte jméno"),
+  phone: z.string().trim().min(6, "Zadejte telefon"),
+});
+
+function CtaForm() {
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [sent, setSent] = useState(false);
+
+  function onSubmit(e: { preventDefault(): void; currentTarget: HTMLFormElement }) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const data = Object.fromEntries(fd) as Record<string, string>;
+    const r = ctaSchema.safeParse(data);
+    if (!r.success) {
+      const errs: Record<string, string> = {};
+      r.error.issues.forEach((i) => (errs[i.path[0] as string] = i.message));
+      setErrors(errs);
+      return;
+    }
+    setErrors({});
+    setSent(true);
+    e.currentTarget.reset();
+  }
+
+  if (sent) {
+    return (
+      <div>
+        <p className="text-xl font-bold">Díky! Brzy se ozveme.</p>
+        <p className="mt-2 text-sm opacity-80">
+          Nebo zavolejte:{" "}
+          <a href="tel:+420739238725" className="font-semibold underline">
+            739 238 725
+          </a>
+        </p>
+        <button type="button" onClick={() => setSent(false)} className="mt-3 text-xs opacity-60 underline">
+          Odeslat znovu
+        </button>
+      </div>
+    );
+  }
+
+  const inputCls =
+    "w-full px-3 py-2.5 rounded bg-white/15 placeholder:text-primary-foreground/60 text-primary-foreground border border-primary-foreground/30 focus:border-primary-foreground outline-none";
+
+  return (
+    <form onSubmit={onSubmit} className="space-y-3">
+      <div className="grid sm:grid-cols-2 gap-3">
+        <div>
+          <input name="name" placeholder="Jméno a příjmení" maxLength={100} className={inputCls} />
+          {errors.name && <p className="text-xs mt-1 text-primary-foreground/80">{errors.name}</p>}
+        </div>
+        <div>
+          <input name="phone" placeholder="Telefon" maxLength={30} className={inputCls} />
+          {errors.phone && <p className="text-xs mt-1 text-primary-foreground/80">{errors.phone}</p>}
+        </div>
+      </div>
+      <div className="flex flex-col sm:flex-row gap-3 items-start">
+        <button
+          type="submit"
+          className="px-6 py-2.5 bg-background text-foreground font-bold rounded-md hover:bg-background/90 transition-colors"
+        >
+          Zajistit si místo →
+        </button>
+        <p className="text-sm opacity-80 self-center">
+          nebo zavolejte:{" "}
+          <a href="tel:+420739238725" className="font-semibold underline">
+            739 238 725
+          </a>
+        </p>
+      </div>
+    </form>
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Autoškola Káča — Řidičák s rodinným přístupem | Česká Třebová" },
       { name: "description", content: "Získejte řidičský průkaz v rodinné autoškole Káča v České Třebové. Trpělivý instruktor pan Borský, flexibilní jízdy, skupiny AM, A1, A2, A i B." },
+      { property: "og:title", content: "Autoškola Káča — Řidičák s rodinným přístupem" },
+      { property: "og:description", content: "Rodinná autoškola v České Třebové. Trpělivý přístup, flexibilní jízdy, skupiny AM–B." },
+      { property: "og:type", content: "website" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Autoškola Káča",
+          "telephone": "+420739238725",
+          "url": "https://autoskolakaca.cz",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Česká Třebová",
+            "addressRegion": "Pardubický kraj",
+            "addressCountry": "CZ",
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.0",
+            "reviewCount": "6",
+            "bestRating": "5",
+            "worstRating": "1",
+          },
+        }),
+      },
     ],
   }),
   component: Index,
 });
 
 function Index() {
+  const reduced = useReducedMotion();
   return (
     <>
       {/* HERO */}
@@ -30,9 +136,9 @@ function Index() {
 
             <motion.h1
               className="text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.05] tracking-tight"
-              initial={{ x: -60, opacity: 0 }}
+              initial={reduced ? false : { x: -60, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ type: "spring", stiffness: 110, damping: 14, delay: 0.2 }}
+              transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 110, damping: 14, delay: 0.2 }}
             >
               Cesta k&nbsp;řidičáku,<br />
               která tě bude<br />
@@ -48,7 +154,7 @@ function Index() {
               <div className="flex flex-wrap gap-4">
                 <motion.div
                   className="relative inline-block"
-                  whileHover="hovered"
+                  whileHover={reduced ? undefined : "hovered"}
                   initial="idle"
                   animate="idle"
                 >
@@ -57,7 +163,7 @@ function Index() {
                     className="absolute inset-0 rounded-md bg-primary/30"
                     variants={{
                       idle: { scale: 1, opacity: 0 },
-                      hovered: {
+                      hovered: reduced ? { scale: 1, opacity: 0 } : {
                         scale: [1, 1.18, 1],
                         opacity: [0.35, 0, 0.35],
                         transition: { duration: 1.1, repeat: Infinity, ease: "easeInOut" },
@@ -67,7 +173,7 @@ function Index() {
                   <motion.div
                     variants={{
                       idle: { scale: 1 },
-                      hovered: { scale: 1.05 },
+                      hovered: { scale: reduced ? 1 : 1.05 },
                     }}
                     transition={{ type: "spring", stiffness: 380, damping: 14 }}
                   >
@@ -111,7 +217,7 @@ function Index() {
             <div className="relative w-full aspect-[5/4] overflow-hidden frame-irregular">
               <img
                 src={heroImg}
-                alt="Instruktor s žákem v autě"
+                alt="Instruktor pan Borský sedí vedle žáka v autě během jízdní lekce autoškoly Káča"
                 width={1280}
                 height={896}
                 fetchPriority="high"
@@ -176,12 +282,7 @@ function Index() {
           <h2 className="text-3xl md:text-4xl font-extrabold leading-tight">
             Připraveni začít?<br />Zápis je otevřený celoročně.
           </h2>
-          <div className="md:text-right">
-            <Link to="/kontakt" className="inline-block px-8 py-4 bg-background text-foreground font-bold rounded-md hover:bg-background/90">
-              Zajistit si místo →
-            </Link>
-            <p className="mt-3 text-sm opacity-80">nebo zavolejte: <a href="tel:+420739238725" className="font-semibold underline">739 238 725</a></p>
-          </div>
+          <CtaForm />
         </div>
       </section>
     </>

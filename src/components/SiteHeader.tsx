@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Phone } from "lucide-react";
 import { AnimatedLogo } from "@/components/AnimatedLogo";
 
@@ -17,6 +17,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [showBar, setShowBar] = useState(false);
   const prevY = useRef(0);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => {
@@ -35,10 +36,10 @@ export function SiteHeader() {
       <AnimatePresence>
         {showBar && (
           <motion.div
-            initial={{ y: -52 }}
+            initial={{ y: reduced ? 0 : -52 }}
             animate={{ y: 0 }}
-            exit={{ y: -52 }}
-            transition={{ type: "spring", stiffness: 340, damping: 30 }}
+            exit={{ y: reduced ? 0 : -52 }}
+            transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 340, damping: 30 }}
             className="fixed top-0 inset-x-0 z-50 bg-primary text-primary-foreground px-6 py-2.5 flex items-center justify-between shadow-lg"
           >
             <span className="text-sm font-medium hidden sm:block">
@@ -109,12 +110,12 @@ export function SiteHeader() {
       <motion.a
         href="tel:+420739238725"
         aria-label="Zavolat Autoškola Káča"
-        className="fixed bottom-6 right-6 z-50 md:hidden flex items-center justify-center w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-xl"
-        initial={{ scale: 0, opacity: 0 }}
+        className="fixed bottom-6 right-6 z-50 md:hidden flex items-center justify-center w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary-foreground"
+        initial={reduced ? false : { scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 1.2, type: "spring", stiffness: 260, damping: 22 }}
-        whileHover={{ scale: 1.12 }}
-        whileTap={{ scale: 0.9 }}
+        transition={reduced ? { duration: 0 } : { delay: 1.2, type: "spring", stiffness: 260, damping: 22 }}
+        whileHover={reduced ? undefined : { scale: 1.12 }}
+        whileTap={reduced ? undefined : { scale: 0.9 }}
       >
         <Phone className="w-6 h-6" />
       </motion.a>

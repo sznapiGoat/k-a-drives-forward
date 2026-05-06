@@ -1,12 +1,52 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+const avgRating = (reviews.reduce((s, r) => s + r.stars, 0) / reviews.length).toFixed(1);
+
+const dateMap: Record<string, string> = {
+  "Únor 2025": "2025-02",
+  "Květen 2025": "2025-05",
+  "Červen 2025": "2025-06",
+  "Srpen 2025": "2025-08",
+  "Září 2025": "2025-09",
+  "Listopad 2025": "2025-11",
+};
+
 export const Route = createFileRoute("/recenze")({
   head: () => ({
     meta: [
       { title: "Recenze — Autoškola Káča | Hodnocení žáků" },
-      { name: "description", content: "Reálné recenze žáků autoškoly Káča v České Třebové. Průměr 3,8/5 hvězd." },
+      { name: "description", content: `Reálné recenze žáků autoškoly Káča v České Třebové. Průměr ${avgRating}/5 hvězd z ${reviews.length} hodnocení.` },
       { property: "og:title", content: "Recenze — Autoškola Káča" },
-      { property: "og:description", content: "Co o nás říkají naši žáci. Průměr 3,8/5." },
+      { property: "og:description", content: `Co o nás říkají naši žáci. Průměr ${avgRating}/5.` },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Autoškola Káča",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": avgRating,
+            "reviewCount": String(reviews.length),
+            "bestRating": "5",
+            "worstRating": "1",
+          },
+          "review": reviews.map((r) => ({
+            "@type": "Review",
+            "author": { "@type": "Person", "name": r.name },
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": String(r.stars),
+              "bestRating": "5",
+              "worstRating": "1",
+            },
+            "reviewBody": r.text,
+            "datePublished": dateMap[r.date] ?? r.date,
+          })),
+        }),
+      },
     ],
   }),
   component: ReviewsPage,

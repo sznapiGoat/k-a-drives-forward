@@ -26,7 +26,7 @@ function AboutPage() {
       <div className="grid md:grid-cols-12 gap-12 items-start">
         <div className="md:col-span-5">
           <div className="frame-irregular overflow-hidden aspect-[4/5]">
-            <img src={instructorImg} alt="Pan Borský" width={800} height={800} loading="lazy" className="w-full h-full object-cover" />
+            <img src={instructorImg} alt="Pan Borský, hlavní instruktor autoškoly Káča — 25 let zkušeností s výukou řízení v České Třebové" width={800} height={800} loading="lazy" className="w-full h-full object-cover" />
           </div>
           <div className="mt-4 px-1">
             <div className="text-sm font-semibold">Pan Borský</div>
