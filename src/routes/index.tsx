@@ -233,9 +233,9 @@ function Index() {
               />
               <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
             </div>
-            <div className=”absolute -bottom-6 left-6 md:left-10 bg-background border-2 border-foreground px-5 py-3 max-w-[260px]” style={{ borderRadius: “20px 4px 20px 4px” }}>
-              <div className=”text-xs uppercase tracking-display text-muted-foreground”>Ing. Kateřina Elblová</div>
-              <div className=”text-sm font-semibold”>Provozovatelka autoškoly Káča</div>
+            <div className="absolute -bottom-6 left-6 md:left-10 bg-background border-2 border-foreground px-5 py-3 max-w-[260px]" style={{ borderRadius: "20px 4px 20px 4px" }}>
+              <div className="text-xs uppercase tracking-display text-muted-foreground">Ing. Kateřina Elblová</div>
+              <div className="text-sm font-semibold">Provozovatelka autoškoly Káča</div>
             </div>
           </div>
         </div>
